@@ -47,4 +47,4 @@ The following command both runs all the steps of the conan file, and publishes t
     $ conan upload eigen/3.3.4@bincrafters/stable --all -r bincrafters
 
 ## License
-[LICENSE_TYPE](LICENSE)
+[MIT License](LICENSE)
