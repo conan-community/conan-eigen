@@ -10,7 +10,7 @@ class EigenConan(ConanFile):
     name = "eigen"
     url = "http://eigen.tuxfamily.org"
     description = "Eigen is a C++ template library for linear algebra: matrices, vectors, numerical solvers, and related algorithms."
-    license = "http://eigen.tuxfamily.org/index.php?title=Main_Page#License"
+    license = "Mozilla Public License Version 2.0"
     build_policy = "always"
 
     def source(self):
