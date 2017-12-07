@@ -12,6 +12,7 @@ class EigenConan(ConanFile):
     description = "Eigen is a C++ template library for linear algebra: matrices, vectors, \
                    numerical solvers, and related algorithms."
     license = "Mozilla Public License Version 2.0"
+    no_copy_source = True
 
     def source(self):
         source_url = "https://bitbucket.org/eigen/eigen"
