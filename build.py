@@ -50,7 +50,7 @@ if __name__ == "__main__":
         username=username,
         channel=channel,
         reference=reference,
-        upload=True,
+        upload=False,
         remotes=remote)
 
     builder.add_common_builds()
