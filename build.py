@@ -15,7 +15,7 @@ def get_version_from_recipe():
     return get_value_from_recipe(r'''version\s*=\s*["'](\S*)["']''').groups()[0]
 
 def get_default_vars():
-    username = os.getenv("CONAN_USERNAME", "bincrafters")
+    username = os.getenv("CONAN_USERNAME", "danimtb")
     channel = os.getenv("CONAN_CHANNEL", "testing")
     version = get_version_from_recipe()
     return username, channel, version
@@ -50,7 +50,7 @@ if __name__ == "__main__":
         username=username,
         channel=channel,
         reference=reference,
-        upload=False,
+        upload=True,
         remotes=upload)
 
     builder.add_common_builds()
