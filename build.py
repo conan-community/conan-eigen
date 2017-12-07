@@ -44,14 +44,14 @@ if __name__ == "__main__":
     name = get_name_from_recipe()
     username, channel, version = get_env_vars()
     reference = "{0}/{1}".format(name, version)
-    upload = str("https://api.bintray.com/conan/{0}/public-conan").format(username)
+    remote = "https://api.bintray.com/conan/{0}/public-conan".format(username)
 
     builder = ConanMultiPackager(
         username=username,
         channel=channel,
         reference=reference,
         upload=True,
-        remotes=upload)
+        remotes=remote)
 
     builder.add_common_builds()
     builder.run()
