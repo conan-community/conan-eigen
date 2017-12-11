@@ -21,6 +21,8 @@ class EigenConan(ConanFile):
         os.rename(glob("eigen-eigen-*")[0], "sources")
 
     def package(self):
+        self.copy("COPYING.*", dst="licenses", src="sources",
+                  ignore_case=True, keep_path=False)
         self.copy(pattern="*", dst="include/Eigen", src="sources/Eigen")
 
     def package_id(self):
