@@ -15,6 +15,10 @@ class EigenConan(ConanFile):
                    numerical solvers, and related algorithms."
     license = "Mozilla Public License Version 2.0"
     no_copy_source = True
+    options = {"EIGEN_USE_BLAS": [True, False],
+               "EIGEN_USE_LAPACKE": [True, False],
+               "EIGEN_USE_LAPACKE_STRICT": [True, False]}
+    default_options = "EIGEN_USE_BLAS=False", "EIGEN_USE_LAPACKE=False", "EIGEN_USE_LAPACKE_STRICT=False"
 
     def source(self):
         tools.get("{0}/get/{1}.tar.gz".format(self.url, self.version))
@@ -27,3 +31,15 @@ class EigenConan(ConanFile):
 
     def package_id(self):
         self.info.header_only()
+
+    def package_info(self):
+        self.cpp_info.includedirs = ["include/Eigen"]
+
+        if self.options.EIGEN_USE_BLAS:
+            self.cpp_info.defines.append("EIGEN_USE_BLAS")
+
+        if self.options.EIGEN_USE_LAPACKE:
+            self.cpp_info.defines.append("EIGEN_USE_LAPACKE")
+
+        if self.options.EIGEN_USE_LAPACKE_STRICT:
+            self.cpp_info.defines.append("EIGEN_USE_LAPACKE_STRICT")
