@@ -38,3 +38,6 @@ tmp/
 
 # IDE
 .idea/*
+
+# Windows
+*Thumbs.db
