@@ -33,8 +33,6 @@ class EigenConan(ConanFile):
         self.info.header_only()
 
     def package_info(self):
-        self.cpp_info.includedirs = ["include/Eigen"]
-
         if self.options.EIGEN_USE_BLAS:
             self.cpp_info.defines.append("EIGEN_USE_BLAS")
 
