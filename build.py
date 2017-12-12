@@ -42,7 +42,7 @@ def get_os():
 
 if __name__ == "__main__":
     name = get_name_from_recipe()
-    username, channel, version = get_env_vars()
+    username, channel, version = get_default_vars()
     login_username = os.getenv("CONAN_LOGIN_USERNAME", "danimtb")
     reference = "{0}/{1}".format(name, version)
     upload_remote = "https://api.bintray.com/conan/conan-community/{0}".format(username)
