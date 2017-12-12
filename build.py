@@ -15,8 +15,8 @@ def get_version_from_recipe():
     return get_value_from_recipe(r'''version\s*=\s*["'](\S*)["']''').groups()[0]
 
 def get_default_vars():
-    username = os.getenv("CONAN_USERNAME", "danimtb")
-    channel = os.getenv("CONAN_CHANNEL", "testing")
+    username = os.getenv("CONAN_USERNAME", "conan")
+    channel = os.getenv("CONAN_CHANNEL", "stable")
     version = get_version_from_recipe()
     return username, channel, version
 
@@ -43,12 +43,14 @@ def get_os():
 if __name__ == "__main__":
     name = get_name_from_recipe()
     username, channel, version = get_env_vars()
+    login_username = os.getenv("CONAN_LOGIN_USERNAME", "danimtb")
     reference = "{0}/{1}".format(name, version)
-    upload_remote = "https://api.bintray.com/conan/{0}/public-conan".format(username)
+    upload_remote = "https://api.bintray.com/conan/conan-community/{0}".format(username)
 
     builder = ConanMultiPackager(
         username=username,
         channel=channel,
+        login_username=login_username,
         reference=reference,
         upload=upload_remote,
         remotes=upload_remote)
