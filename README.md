@@ -4,7 +4,7 @@
 
 [![Download](https://api.bintray.com/packages/conan-community/conan/eigen%3Aconan/images/download.svg?version=3.1.4%3Astable)](https://bintray.com/conan-community/conan/eigen%3Aconan/3.1.4%3Astable/link)
 [![Build Status](https://travis-ci.org/danimtb/conan-eigen.svg?branch=stable%2F3.1.4)](https://travis-ci.org/danimtb/conan-eigen)
-[![Build status](https://ci.appveyor.com/api/projects/status/jyeh443gn0l0f3bi?svg=true)](https://ci.appveyor.com/project/danimtb/conan-eigen)
+[![Build status](https://ci.appveyor.com/api/projects/status/jyeh443gn0l0f3bi/branch/stable/3.1.4?svg=true)](https://ci.appveyor.com/project/danimtb/conan-eigen/branch/stable/3.1.4)
 
 [Conan.io](https://conan.io) package for [Eigen](https://bitbucket.org/eigen/eigen) project
 
