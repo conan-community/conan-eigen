@@ -19,13 +19,13 @@ if __name__ == "__main__":
     login_username = "conanbot"
     upload_remote = "https://api.bintray.com/conan/conan-community/{0}".format(username)
 
-        builder = ConanMultiPackager(
-            username=username,
-            channel=channel,
-            login_username=login_username,
-            reference=reference,
-            upload=upload_remote,
-            remotes=upload_remote)
+    builder = ConanMultiPackager(
+        username=username,
+        channel=channel,
+        login_username=login_username,
+        reference=reference,
+        upload=upload_remote,
+        remotes=upload_remote)
     
     for version in ["3.1.4", "3.2.10", "3.3.4"]:
         reference = "{0}/{1}".format(name, version)
