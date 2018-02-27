@@ -23,7 +23,6 @@ if __name__ == "__main__":
         username=username,
         channel=channel,
         login_username=login_username,
-        reference=reference,
         upload=upload_remote,
         remotes=upload_remote)
     
