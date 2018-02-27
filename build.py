@@ -11,30 +11,29 @@ def get_value_from_recipe(search_string):
 def get_name_from_recipe():
     return get_value_from_recipe(r'''name\s*=\s*["'](\S*)["']''').groups()[0]
 
-def get_version_from_recipe():
-    return get_value_from_recipe(r'''version\s*=\s*["'](\S*)["']''').groups()[0]
 
 if __name__ == "__main__":
     name = get_name_from_recipe()
     username = "conan"
     channel = "stable"
-    version = get_version_from_recipe()
     login_username = "conanbot"
-    reference = "{0}/{1}".format(name, version)
     upload_remote = "https://api.bintray.com/conan/conan-community/{0}".format(username)
 
-    builder = ConanMultiPackager(
-        username=username,
-        channel=channel,
-        login_username=login_username,
-        reference=reference,
-        upload=upload_remote,
-        remotes=upload_remote)
-    builder.add(settings={"os":"windows",
-                          "compiler":"Visual Studio",
-                          "compiler.version":"15",
-                          "build_type":"Release",
-                          "arch":"x86_64"},
-                options=None,
-                env_vars=None)
-    builder.run()
+    for version in ["3.1.4", "3.2.10", "3.3.4"]:
+        reference = "{0}/{1}".format(name, version)
+
+        builder = ConanMultiPackager(
+            username=username,
+            channel=channel,
+            login_username=login_username,
+            reference=reference,
+            upload=upload_remote,
+            remotes=upload_remote)
+        builder.add(settings={"os":"windows",
+                              "compiler":"Visual Studio",
+                              "compiler.version":"15",
+                              "build_type":"Release",
+                              "arch":"x86_64"},
+                    options=None,
+                    env_vars=None)
+        builder.run()
