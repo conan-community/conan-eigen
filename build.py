@@ -26,7 +26,7 @@ if __name__ == "__main__":
         upload=upload_remote,
         remotes=upload_remote)
     
-    for version in ["3.1.4", "3.2.10", "3.3.4"]:
+    for version in ["3.2.10", "3.3.4"]:
         reference = "{0}/{1}".format(name, version)
         builder.add(settings={"os":"Windows",
                               "compiler":"Visual Studio",
