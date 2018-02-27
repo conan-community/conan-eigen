@@ -29,7 +29,7 @@ if __name__ == "__main__":
             reference=reference,
             upload=upload_remote,
             remotes=upload_remote)
-        builder.add(settings={"os":"windows",
+        builder.add(settings={"os":"Windows",
                               "compiler":"Visual Studio",
                               "compiler.version":"15",
                               "build_type":"Release",
