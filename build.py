@@ -19,9 +19,6 @@ if __name__ == "__main__":
     login_username = "conanbot"
     upload_remote = "https://api.bintray.com/conan/conan-community/{0}".format(username)
 
-    for version in ["3.1.4", "3.2.10", "3.3.4"]:
-        reference = "{0}/{1}".format(name, version)
-
         builder = ConanMultiPackager(
             username=username,
             channel=channel,
@@ -29,11 +26,15 @@ if __name__ == "__main__":
             reference=reference,
             upload=upload_remote,
             remotes=upload_remote)
+    
+    for version in ["3.1.4", "3.2.10", "3.3.4"]:
+        reference = "{0}/{1}".format(name, version)
         builder.add(settings={"os":"Windows",
                               "compiler":"Visual Studio",
                               "compiler.version":"15",
                               "build_type":"Release",
                               "arch":"x86_64"},
                     options=None,
-                    env_vars=None)
+                    env_vars=None,
+                    reference=reference)
         builder.run()
