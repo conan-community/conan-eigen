@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 from conans import ConanFile, tools
 import os
 from glob import glob
@@ -8,6 +5,7 @@ from glob import glob
 
 class EigenConan(ConanFile):
     name = "eigen"
+    version = "3.3.4"
     url = "http://bitbucket.org/eigen/eigen"
     homepage = "http://eigen.tuxfamily.org"
     description = "Eigen is a C++ template library for linear algebra: matrices, vectors, \

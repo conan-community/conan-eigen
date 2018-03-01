@@ -11,9 +11,14 @@ def get_value_from_recipe(search_string):
 def get_name_from_recipe():
     return get_value_from_recipe(r'''name\s*=\s*["'](\S*)["']''').groups()[0]
 
+def get_version_from_recipe():
+    return get_value_from_recipe(r'''version\s*=\s*["'](\S*)["']''').groups()[0]
+
 
 if __name__ == "__main__":
     name = get_name_from_recipe()
+    version = get_version_from_recipe()
+    reference = "{0}/{1}".format(name, version)
     username = "conan"
     channel = "stable"
     login_username = "conanbot"
@@ -24,16 +29,14 @@ if __name__ == "__main__":
         channel=channel,
         login_username=login_username,
         upload=upload_remote,
-        remotes=upload_remote)
-    
-    for version in ["3.2.10", "3.3.4"]:
-        reference = "{0}/{1}".format(name, version)
-        builder.add(settings={"os":"Windows",
-                              "compiler":"Visual Studio",
-                              "compiler.version":"15",
-                              "build_type":"Release",
-                              "arch":"x86_64"},
-                    options=None,
-                    env_vars=None,
-                    reference=reference)
+        remotes=upload_remote,
+        reference=reference)
+
+    builder.add(settings={"os":"Windows",
+                          "compiler":"Visual Studio",
+                          "compiler.version":"15",
+                          "build_type":"Release",
+                          "arch":"x86_64"},
+                options=None,
+                env_vars=None)
     builder.run()
