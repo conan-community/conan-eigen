@@ -17,14 +17,18 @@ class EigenConan(ConanFile):
                "EIGEN_USE_LAPACKE_STRICT": [True, False]}
     default_options = "EIGEN_USE_BLAS=False", "EIGEN_USE_LAPACKE=False", "EIGEN_USE_LAPACKE_STRICT=False"
 
+    @property
+    def source_subfolder(self):
+        return "sources"
+
     def source(self):
         tools.get("{0}/get/{1}.tar.gz".format(self.url, self.version))
-        os.rename(glob("eigen-eigen-*")[0], "sources")
+        os.rename(glob("eigen-eigen-*")[0], self.source_subfolder)
 
     def package(self):
-        self.copy("COPYING.*", dst="licenses", src="sources",
+        self.copy("COPYING.*", dst="licenses", src=self.source_subfolder,
                   ignore_case=True, keep_path=False)
-        self.copy(pattern="*", dst="include/Eigen", src="sources/Eigen")
+        self.copy(pattern="*", dst="include/Eigen", src="{}/Eigen".format(self.source_subfolder))
 
     def package_id(self):
         self.info.header_only()
