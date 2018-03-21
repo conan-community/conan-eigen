@@ -25,6 +25,8 @@ if __name__ == "__main__":
     upload_remote = "https://api.bintray.com/conan/conan-community/{0}".format(username)
 
     builder = ConanMultiPackager(
+        stable_branch_pattern="stable/*",
+        upload_only_when_stable=True,
         username=username,
         channel=channel,
         login_username=login_username,
