@@ -29,6 +29,7 @@ class EigenConan(ConanFile):
         self.copy("COPYING.*", dst="licenses", src=self.source_subfolder,
                   ignore_case=True, keep_path=False)
         self.copy(pattern="*", dst="include/Eigen", src="{}/Eigen".format(self.source_subfolder))
+        self.copy(pattern="*", dst="include/unsupported", src="{}/unsupported".format(self.source_subfolder))
 
     def package_id(self):
         self.info.header_only()
