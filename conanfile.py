@@ -16,8 +16,6 @@ class EigenConan(ConanFile):
                "EIGEN_USE_LAPACKE": [True, False],
                "EIGEN_USE_LAPACKE_STRICT": [True, False]}
     default_options = "EIGEN_USE_BLAS=False", "EIGEN_USE_LAPACKE=False", "EIGEN_USE_LAPACKE_STRICT=False"
-    # FIXME: remove settings after conan 1.5 not needed for cmake.install() anymore
-    settings = "os", "compiler", "arch"
 
 
     @property
