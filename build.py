@@ -20,7 +20,6 @@ if __name__ == "__main__":
     version = get_version_from_recipe()
     reference = "{0}/{1}".format(name, version)
     username = "conan"
-    channel = "stable"
     login_username = "conanbot"
     upload_remote = "https://api.bintray.com/conan/conan-community/{0}".format(username)
 
@@ -28,7 +27,6 @@ if __name__ == "__main__":
         stable_branch_pattern="stable/*",
         upload_only_when_stable=True,
         username=username,
-        channel=channel,
         login_username=login_username,
         upload=upload_remote,
         remotes=upload_remote,
