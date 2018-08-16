@@ -1,5 +1,5 @@
 from conan.packager import ConanMultiPackager
-import os, re, platform
+import os, re
 
 
 def get_value_from_recipe(search_string):
@@ -16,6 +16,7 @@ def get_version_from_recipe():
 
 
 if __name__ == "__main__":
+    header_only = True
     name = get_name_from_recipe()
     version = get_version_from_recipe()
     reference = "{0}/{1}".format(name, version)
@@ -28,15 +29,17 @@ if __name__ == "__main__":
         upload_only_when_stable=True,
         username=username,
         login_username=login_username,
+        reference=reference,
         upload=upload_remote,
-        remotes=upload_remote,
-        reference=reference)
+        remotes=upload_remote)
 
-    builder.add(settings={"os":"Windows",
-                          "compiler":"Visual Studio",
-                          "compiler.version":"15",
-                          "build_type":"Release",
-                          "arch":"x86_64"},
-                options=None,
-                env_vars=None)
+    if header_only:
+        filtered_builds = []
+        for settings, options, env_vars, build_requires, reference in builder.items:
+            if settings["compiler"] == "gcc":
+                filtered_builds.append([settings, options, env_vars, build_requires])
+                break
+        builder.builds = filtered_builds
+    else:
+        builder.add_common_builds()
     builder.run()
