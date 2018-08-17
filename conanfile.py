@@ -17,7 +17,6 @@ class EigenConan(ConanFile):
                "EIGEN_USE_LAPACKE_STRICT": [True, False]}
     default_options = "EIGEN_USE_BLAS=False", "EIGEN_USE_LAPACKE=False", "EIGEN_USE_LAPACKE_STRICT=False"
 
-
     @property
     def source_subfolder(self):
         return "sources"
@@ -26,17 +25,12 @@ class EigenConan(ConanFile):
         tools.get("{0}/get/{1}.tar.gz".format(self.url, self.version))
         os.rename(glob("eigen-eigen-*")[0], self.source_subfolder)
 
-    def build(self):
+    def package(self):
         cmake = CMake(self)
         cmake.configure(source_folder=self.source_subfolder)
         cmake.install()
-
-    def package(self):
         self.copy("COPYING.*", dst="licenses", src=self.source_subfolder,
                   ignore_case=True, keep_path=False)
-
-    def package_id(self):
-        self.info.header_only()
 
     def package_info(self):
         self.cpp_info.includedirs = ['include/eigen3']
