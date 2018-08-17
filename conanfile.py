@@ -5,7 +5,7 @@ from glob import glob
 
 class EigenConan(ConanFile):
     name = "eigen"
-    version = "3.3.4"
+    version = "3.3.5"
     url = "http://bitbucket.org/eigen/eigen"
     homepage = "http://eigen.tuxfamily.org"
     description = "Eigen is a C++ template library for linear algebra: matrices, vectors, \
@@ -16,9 +16,6 @@ class EigenConan(ConanFile):
                "EIGEN_USE_LAPACKE": [True, False],
                "EIGEN_USE_LAPACKE_STRICT": [True, False]}
     default_options = "EIGEN_USE_BLAS=False", "EIGEN_USE_LAPACKE=False", "EIGEN_USE_LAPACKE_STRICT=False"
-    # FIXME: remove settings after conan 1.5 not needed for cmake.install() anymore
-    settings = "os", "compiler", "arch"
-
 
 
     @property
@@ -37,9 +34,6 @@ class EigenConan(ConanFile):
     def package(self):
         self.copy("COPYING.*", dst="licenses", src=self.source_subfolder,
                   ignore_case=True, keep_path=False)
-
-    def package_id(self):
-        self.info.header_only()
 
     def package_info(self):
         self.cpp_info.includedirs = ['include/eigen3']
