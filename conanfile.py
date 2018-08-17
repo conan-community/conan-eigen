@@ -16,9 +16,6 @@ class EigenConan(ConanFile):
                "EIGEN_USE_LAPACKE": [True, False],
                "EIGEN_USE_LAPACKE_STRICT": [True, False]}
     default_options = "EIGEN_USE_BLAS=False", "EIGEN_USE_LAPACKE=False", "EIGEN_USE_LAPACKE_STRICT=False"
-    # FIXME: remove settings after conan 1.5 not needed for cmake.install() anymore
-    settings = "os", "compiler", "arch"
-
 
     @property
     def source_subfolder(self):
@@ -34,11 +31,11 @@ class EigenConan(ConanFile):
         cmake.install()
 
     def package(self):
+        cmake = CMake(self)
+        cmake.configure(source_folder=self.source_subfolder)
+        cmake.install()
         self.copy("COPYING.*", dst="licenses", src=self.source_subfolder,
                   ignore_case=True, keep_path=False)
-
-    def package_id(self):
-        self.info.header_only()
 
     def package_info(self):
         self.cpp_info.includedirs = ['include/eigen3']
