@@ -20,6 +20,7 @@ class EigenConan(ConanFile):
     settings = "os", "compiler", "arch"
 
 
+
     @property
     def source_subfolder(self):
         return "sources"
