@@ -23,7 +23,7 @@ class EigenConan(ConanFile):
 
     def source(self):
         source_url = "http://bitbucket.org/eigen/eigen"
-        tools.get("{0}/get/{1}.tar.gz".format(self.source_url, self.version))
+        tools.get("{0}/get/{1}.tar.gz".format(source_url, self.version))
         os.rename(glob("eigen-eigen-*")[0], self.source_subfolder)
 
     def package(self):
