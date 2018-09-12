@@ -33,6 +33,8 @@ if __name__ == "__main__":
         upload=upload_remote,
         remotes=upload_remote)
 
+    builder.add_common_builds()
+    
     if header_only:
         filtered_builds = []
         for settings, options, env_vars, build_requires, reference in builder.items:
@@ -40,6 +42,4 @@ if __name__ == "__main__":
                 filtered_builds.append([settings, options, env_vars, build_requires])
                 break
         builder.builds = filtered_builds
-    else:
-        builder.add_common_builds()
     builder.run()
