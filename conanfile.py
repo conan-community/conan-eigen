@@ -6,7 +6,7 @@ from glob import glob
 class EigenConan(ConanFile):
     name = "eigen"
     version = "3.3.5"
-    url = "http://bitbucket.org/eigen/eigen"
+    url = "https://github.com/conan-community/conan-eigen"
     homepage = "http://eigen.tuxfamily.org"
     description = "Eigen is a C++ template library for linear algebra: matrices, vectors, \
                    numerical solvers, and related algorithms."
@@ -22,7 +22,8 @@ class EigenConan(ConanFile):
         return "sources"
 
     def source(self):
-        tools.get("{0}/get/{1}.tar.gz".format(self.url, self.version))
+        source_url = "http://bitbucket.org/eigen/eigen"
+        tools.get("{0}/get/{1}.tar.gz".format(self.source_url, self.version))
         os.rename(glob("eigen-eigen-*")[0], self.source_subfolder)
 
     def package(self):
