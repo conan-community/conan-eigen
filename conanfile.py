@@ -43,3 +43,5 @@ class EigenConan(ConanFile):
 
         if self.options.EIGEN_USE_LAPACKE_STRICT:
             self.cpp_info.defines.append("EIGEN_USE_LAPACKE_STRICT")
+
+        self.env_info.Eigen3_DIR = os.path.join(self.package_folder, "share", "eigen3", "cmake")
