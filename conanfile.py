@@ -1,4 +1,4 @@
-from conans import ConanFile, tools, CMake
+from conans import ConanFile, tools
 import os
 from glob import glob
 
@@ -31,10 +31,8 @@ class EigenConan(ConanFile):
         os.rename(glob("eigen-eigen-*")[0], self._source_subfolder)
 
     def package(self):
-        cmake = CMake(self)
-        cmake.configure(source_folder=self._source_subfolder)
-        cmake.install()
         self.copy("COPYING.*", dst="licenses", src=self._source_subfolder)
+        self.copy("*", dst=os.path.join("include", "eigen3", "Eigen"), src=os.path.join(self._source_subfolder, "Eigen"))
 
     def package_info(self):
         self.cpp_info.includedirs = ['include/eigen3']
