@@ -10,28 +10,31 @@ class EigenConan(ConanFile):
     homepage = "http://eigen.tuxfamily.org"
     description = "Eigen is a C++ template library for linear algebra: matrices, vectors, \
                    numerical solvers, and related algorithms."
-    license = "Mozilla Public License Version 2.0"
-    no_copy_source = True
+    license = "MPL-2.0"
+    author = "Conan Community"
+    topics = ("eigen", "algebra", "linear-algebra", "vector", "numerical")
+    exoports = "LICENSE"
     options = {"EIGEN_USE_BLAS": [True, False],
                "EIGEN_USE_LAPACKE": [True, False],
                "EIGEN_USE_LAPACKE_STRICT": [True, False]}
-    default_options = "EIGEN_USE_BLAS=False", "EIGEN_USE_LAPACKE=False", "EIGEN_USE_LAPACKE_STRICT=False"
+    default_options = {"EIGEN_USE_BLAS": False, "EIGEN_USE_LAPACKE": False, "EIGEN_USE_LAPACKE_STRICT": False}
+    no_copy_source = True
 
     @property
-    def source_subfolder(self):
-        return "sources"
+    def _source_subfolder(self):
+        return "source_subfolder"
 
     def source(self):
         source_url = "http://bitbucket.org/eigen/eigen"
-        tools.get("{0}/get/{1}.tar.gz".format(source_url, self.version))
-        os.rename(glob("eigen-eigen-*")[0], self.source_subfolder)
+        sha256 = "7e84ef87a07702b54ab3306e77cea474f56a40afa1c0ab245bb11725d006d0da"
+        tools.get("{0}/get/{1}.tar.gz".format(source_url, self.version), sha256=sha256)
+        os.rename(glob("eigen-eigen-*")[0], self._source_subfolder)
 
     def package(self):
         cmake = CMake(self)
-        cmake.configure(source_folder=self.source_subfolder)
+        cmake.configure(source_folder=self._source_subfolder)
         cmake.install()
-        self.copy("COPYING.*", dst="licenses", src=self.source_subfolder,
-                  ignore_case=True, keep_path=False)
+        self.copy("COPYING.*", dst="licenses", src=self._source_subfolder)
 
     def package_info(self):
         self.cpp_info.includedirs = ['include/eigen3']
