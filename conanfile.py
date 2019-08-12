@@ -15,10 +15,6 @@ class EigenConan(ConanFile):
     topics = ("eigen", "algebra", "linear-algebra", "vector", "numerical")
     exports = "LICENSE"
     exports_sources = "FindEigen3.cmake"
-    options = {"EIGEN_USE_BLAS": [True, False],
-               "EIGEN_USE_LAPACKE": [True, False],
-               "EIGEN_USE_LAPACKE_STRICT": [True, False]}
-    default_options = {"EIGEN_USE_BLAS": False, "EIGEN_USE_LAPACKE": False, "EIGEN_USE_LAPACKE_STRICT": False}
     no_copy_source = True
 
     @property
@@ -52,11 +48,3 @@ class EigenConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.includedirs = ['include/eigen3', 'include/unsupported']
-        if self.options.EIGEN_USE_BLAS:
-            self.cpp_info.defines.append("EIGEN_USE_BLAS")
-
-        if self.options.EIGEN_USE_LAPACKE:
-            self.cpp_info.defines.append("EIGEN_USE_LAPACKE")
-
-        if self.options.EIGEN_USE_LAPACKE_STRICT:
-            self.cpp_info.defines.append("EIGEN_USE_LAPACKE_STRICT")
