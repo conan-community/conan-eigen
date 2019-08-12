@@ -37,6 +37,9 @@ class EigenConan(ConanFile):
         os.remove(os.path.join(self.package_folder, "include", "eigen3", "Eigen", "CMakeLists.txt"))
         os.remove(os.path.join(self.package_folder, "include", "unsupported", "unsupported", "Eigen", "CMakeLists.txt"))
 
+    def package_id(self):
+        self.info.header_only()
+
     def package_info(self):
         self.cpp_info.includedirs = ['include/eigen3', 'include/unsupported']
         if self.options.EIGEN_USE_BLAS:
@@ -47,5 +50,3 @@ class EigenConan(ConanFile):
 
         if self.options.EIGEN_USE_LAPACKE_STRICT:
             self.cpp_info.defines.append("EIGEN_USE_LAPACKE_STRICT")
-
-        self.env_info.Eigen3_DIR = os.path.join(self.package_folder, "share", "eigen3", "cmake")
