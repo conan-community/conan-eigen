@@ -33,10 +33,12 @@ class EigenConan(ConanFile):
     def package(self):
         self.copy("COPYING.*", dst="licenses", src=self._source_subfolder)
         self.copy("*", dst=os.path.join("include", "eigen3", "Eigen"), src=os.path.join(self._source_subfolder, "Eigen"))
+        self.copy("*", dst=os.path.join("include", "unsupported", "unsupported", "Eigen"), src=os.path.join(self._source_subfolder, "unsupported", "Eigen"))
         os.remove(os.path.join(self.package_folder, "include", "eigen3", "Eigen", "CMakeLists.txt"))
+        os.remove(os.path.join(self.package_folder, "include", "unsupported", "unsupported", "Eigen", "CMakeLists.txt"))
 
     def package_info(self):
-        self.cpp_info.includedirs = ['include/eigen3']
+        self.cpp_info.includedirs = ['include/eigen3', 'include/unsupported']
         if self.options.EIGEN_USE_BLAS:
             self.cpp_info.defines.append("EIGEN_USE_BLAS")
 

@@ -1,5 +1,7 @@
 #include <iostream>
 #include <Eigen/Core>
+#include <unsupported/Eigen/MatrixFunctions>
+
 
 int main(void)
 {
