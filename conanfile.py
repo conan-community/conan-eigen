@@ -14,6 +14,7 @@ class EigenConan(ConanFile):
     author = "Conan Community"
     topics = ("eigen", "algebra", "linear-algebra", "vector", "numerical")
     exports = "LICENSE"
+    exports_sources = "FindEigen3.cmake"
     options = {"EIGEN_USE_BLAS": [True, False],
                "EIGEN_USE_LAPACKE": [True, False],
                "EIGEN_USE_LAPACKE_STRICT": [True, False]}
@@ -37,6 +38,7 @@ class EigenConan(ConanFile):
         self.copy("*", dst=eigen_folder, src=os.path.join(self._source_subfolder, "Eigen"))
         self.copy("*", dst=unsupported_folder, src=os.path.join(self._source_subfolder, "unsupported", "Eigen"))
         self.copy("signature_of_eigen3_matrix_library", dst=os.path.join("include", "eigen3"), src=self._source_subfolder)
+        self.copy("FindEigen3.cmake")
         os.remove(os.path.join(eigen_folder, "CMakeLists.txt"))
         os.remove(os.path.join(unsupported_folder, "CMakeLists.txt"))
         os.remove(os.path.join(unsupported_folder, "CXX11", "CMakeLists.txt"))
