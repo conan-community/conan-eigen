@@ -31,11 +31,19 @@ class EigenConan(ConanFile):
         os.rename(glob("eigen-eigen-*")[0], self._source_subfolder)
 
     def package(self):
+        unsupported_folder = os.path.join(self.package_folder, "include", "eigen3", "unsupported", "Eigen")
+        eigen_folder = os.path.join(self.package_folder, "include", "eigen3", "Eigen")
         self.copy("COPYING.*", dst="licenses", src=self._source_subfolder)
-        self.copy("*", dst=os.path.join("include", "eigen3", "Eigen"), src=os.path.join(self._source_subfolder, "Eigen"))
-        self.copy("*", dst=os.path.join("include", "unsupported", "unsupported", "Eigen"), src=os.path.join(self._source_subfolder, "unsupported", "Eigen"))
-        os.remove(os.path.join(self.package_folder, "include", "eigen3", "Eigen", "CMakeLists.txt"))
-        os.remove(os.path.join(self.package_folder, "include", "unsupported", "unsupported", "Eigen", "CMakeLists.txt"))
+        self.copy("*", dst=eigen_folder, src=os.path.join(self._source_subfolder, "Eigen"))
+        self.copy("*", dst=unsupported_folder, src=os.path.join(self._source_subfolder, "unsupported", "Eigen"))
+        self.copy("signature_of_eigen3_matrix_library", dst=os.path.join("include", "eigen3"), src=self._source_subfolder)
+        os.remove(os.path.join(eigen_folder, "CMakeLists.txt"))
+        os.remove(os.path.join(unsupported_folder, "CMakeLists.txt"))
+        os.remove(os.path.join(unsupported_folder, "CXX11", "CMakeLists.txt"))
+        os.remove(os.path.join(unsupported_folder, "CXX11", "src", "Tensor", "README.md"))
+        os.remove(os.path.join(unsupported_folder, "src", "EulerAngles", "CMakeLists.txt"))
+        os.rename(os.path.join(unsupported_folder, "src", "LevenbergMarquardt", "CopyrightMINPACK.txt"),
+                               os.path.join(self.package_folder, "licenses", "CopyrightMINPACK.txt"))
 
     def package_id(self):
         self.info.header_only()
