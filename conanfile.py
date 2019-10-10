@@ -47,4 +47,5 @@ class EigenConan(ConanFile):
         self.info.header_only()
 
     def package_info(self):
+        self.cpp_info.name = "Eigen3"
         self.cpp_info.includedirs = ['include/eigen3', 'include/unsupported']
